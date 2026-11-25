@@ -90,7 +90,7 @@ def process_tuple_set(item_t:tuple[int,int,str],item_s:set[bytes]):
 
 print(process_tuple_set((5,6,'a'),{b"a"}))
 
-print("-" * 20)
+print("*" * 20)
 
 # dict
 def process_dict(prices:dict[str,int]):
@@ -126,7 +126,7 @@ def reverse_array(item:Iterable[str]) ->list[str]:
 
 print(reverse_array(["1","2","3"]))
 
-print("-" * 20)
+print("*" * 20)
 #Typehint with class
 class person:
     def __init__(self, name:str):
@@ -137,3 +137,34 @@ def get_name(one_person:person)->str:
 
 p = person("pooja")     
 print(get_name(p))   
+print("*" * 20)
+
+# Literal in typehint
+
+from typing import Literal
+
+def set_access(name:str, role:Literal["admin","editor","viewer"])->str:
+    return f"{name} has a {role} permission"
+
+print(set_access("Pooja","admin"))
+print(set_access("Ram","editor"))
+print(set_access("Sham","xyz"))          #different role(no error-python doesnt enforce typehint)
+
+print("*" * 20)
+
+# Enum in TypeHint
+
+from enum import Enum
+
+class Role(Enum):
+    ADMIN = "admin"
+    EDITOR = "editor"
+    VIEWER = "viewer"
+
+def assign_role(user=str, role=Role) ->str:
+    return f"{user} has a role name= {role.name}, role value={role.value}"
+
+print(assign_role("Pooja",Role.ADMIN))    
+print(assign_role("Ram",Role.EDITOR))    
+
+
